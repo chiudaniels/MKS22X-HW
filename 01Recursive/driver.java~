@@ -1,0 +1,10 @@
+public class driver{
+    public static void main (String[]args){
+	Recursion x=new Recursion();
+	System.out.println(x.name());
+	System.out.println(sqrt(4));
+	System.out.println(sqrt(0));
+	System.out.println(sqrt(-1));
+	System.out.println(sqrt(.001));
+    }
+}
