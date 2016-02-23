@@ -1,0 +1,81 @@
+public class KnightBoard{
+    int[][]board;
+    int index = 0;
+    public KnightBoard(int n){
+	 board =new int [n][n];
+    }
+    public boolean knightMove(int n,int count, int xpos, int ypos){
+	if (count >= n * n -1){
+	    return true;
+	}
+	index++;
+	 //up and right
+	if ((n==0 &&  xpos + 1 < board.length && ypos+ 2 < board[0].length && board[xpos+1][ypos+3]==0)&& knightMove(n,count+1,xpos+1,ypos +2)){
+	    //board[xpos+1][ypos+ 2]=count;
+	    return true;
+	}
+	//up and left
+	if ((n==1 && xpos -1 > board.length && ypos + 2 < board[0].length && board[xpos-1][ypos+2]==0 )&& knightMove(n,count+1,xpos-1,ypos +2)){
+	    //board[xpos-1][ypos+ 2]=count;
+	     return true;
+	}
+	//left and up
+	if ((n==2 && xpos + 2 < board.length && ypos+1 < board[0].length && board[xpos+2][ypos+1]==0)&& knightMove(n,count+1,xpos+2,ypos +1)){
+	    //board[xpos+2][ypos+1]=count;
+	     return true;
+	}
+	//left and down
+	if ((n==3  && xpos + 2 < board.length && ypos-1 > board[0].length && board[xpos+2][ypos-1]==0)&& knightMove(n,count+1,xpos+2,ypos -1)){
+	    // board[xpos+2][ypos-1]=count;
+	     return true;
+	}
+	//left and up
+	if ((n==4 && xpos + 1 < board.length && ypos-2 > board[0].length && board[xpos+1][ypos-2]==0)&& knightMove(n,count+1,xpos+1,ypos -2)){
+	    //board[xpos+1][ypos-2]=count;
+	     return true;
+	}
+	//left and down
+	if ((n==5 && xpos - 1 > board.length && ypos-2 > board[0].length && board[xpos-1][ypos-2]==0)&& knightMove(n,count+1,xpos-1,ypos -2)){
+	    //board[xpos-1][ypos-2]=count;
+	     return true;
+	}
+	// 
+	if ((n==6 && xpos-2 > board.length && ypos+1 < board[0].length && board[xpos-2][ypos+1]==0 )&& knightMove(n,count+1,xpos-2,ypos +1)){
+	    //board[xpos-2][ypos+1]=count;
+	     return true;
+	}
+	if ((n==7 && xpos -2 > board.length && ypos-1 > board[0].length && board[xpos-2][ypos-1]==0 )&& knightMove(n,count+1,xpos-2,ypos -1)){
+	    //board[xpos-2][ypos-1]=count;
+	     return true;
+	}
+	return false;
+    }
+    public boolean solve(){
+	return knightMove(0,0,0,0);
+    }
+
+    /* public boolean solveH(int count, int xcor, int ycor){
+	if (count>= board.length*board[0].length-1)
+	while (index > board.length* board[0].length -1){
+	}
+	}*/
+
+    public void printSolution(){
+	String ans= "";
+	if (board.length * board[0].length <10){
+	    for (int row;row < board.length; row++){
+		for (int col; col < board[0].length; col++){
+		    ans += board[row][col];
+		}
+	    }
+	}
+	else{
+	}
+    }
+
+     public static void main(String[]args){
+	KnightBoard b = new KnightBoard(5);
+	b.solve();
+	//System.out.println(b.knightMove(5,1,0,0));
+     }
+}
