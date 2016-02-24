@@ -69,7 +69,7 @@ public class Bronze{
     }
 
     public static void main(String []args) throws IOException{
-	File file= new File ("input.txt");
+	File file= new File ("makelake.in");
 	Scanner sc = new Scanner (file);
 	int a=sc.nextInt();
 	int b=sc.nextInt();
