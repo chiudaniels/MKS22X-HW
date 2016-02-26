@@ -20,8 +20,14 @@ public class Maze{
       3. When the file is not found, print an error and exit the program.
     */
     public Maze(String filename, boolean ani){
-	File file=new File(filename);
-        scanner sc = new scanner (file);
+	File file = null;
+	Scanner sc= null;
+	try{
+	    file=new File("data1.dat");
+	    sc = new Scanner (file);
+        }
+	catch (FileNotFoundException e){
+	}
 	int length= sc.nextLine().length();
 	int height =0;
         while (sc.hasNextLine()){
