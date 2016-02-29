@@ -2,8 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class Maze{
-
-
+    
     private char[][]maze;
     private int startx,starty;
     private boolean animate;
@@ -20,20 +19,49 @@ public class Maze{
       3. When the file is not found, print an error and exit the program.
     */
     public Maze(String filename, boolean ani){
+	//matthew helped me with this part
 	File file = null;
 	Scanner sc= null;
+	Scanner scheight=null;
+	Scanner sclength=null;
+	animate = ani;
+	//
 	try{
 	    file=new File("data1.dat");
 	    sc = new Scanner (file);
+	    scheight= new Scanner (file);
+	    sclength= new Scanner (file);
+	    
         }
 	catch (FileNotFoundException e){
 	}
-	int length= sc.nextLine().length();
+	int length= sclength.nextLine().length();
 	int height =0;
-        while (sc.hasNextLine()){
+        while (scheight.hasNextLine()){
 	    height ++;
+	    scheight.nextLine();
 	}
-	maze= new char [length][height];
+	maze= new char [height][length];
+	String temp ="";
+	while (sc.hasNextLine()){
+	    temp += sc.nextLine();
+	}
+	int pos=0;
+        for (int row=0; row<maze.length; row++){
+	    for (int col=0; col<maze[0].length; col++){  
+		maze[row][col]=temp.charAt(pos);
+		pos++;
+	    }
+	}
+	for (int row=0; row<maze.length; row++){
+	    for (int col=0; col<maze[0].length; col++){  
+		if(maze[row][col]=='S'){
+		    startx= row;
+		    starty= col;
+		}
+	    }
+	}
+	//System.out.println(temp);
     }
 
 
@@ -42,6 +70,34 @@ public class Maze{
       Things to note:
        When no S is contained in maze, print an error and return false.
     */
+
+    public boolean solve(int posx, int posy){
+	if (maze[posx][posy] == 'E'){
+	    return true;
+	}
+	if (maze[posx][posy] == '#'){
+	    return false;
+	}
+	maze[posx][posy]='@';
+	if (posx+1<maze.length && maze[posx+1][posy] !='#' && solve(posx+1,posy)){
+	    System.out.println(maze[posx+1][posy]);
+	    return true;
+	}
+	if (posy+1<maze[0].length && maze[posx][posy+1]!='#' && solve(posx,posy+1)){
+	    System.out.println( maze[posx][posy+1]);
+	    return true;
+	}
+	if (posx-1>=0 && maze[posx-1][posy]!='#' && solve(posx-1,posy)){
+	    System.out.println(maze[posx-1][posy]);
+	    return true;
+	}
+	if (posy-1>=0 && maze[startx][posy-1]!='#' && solve(posx,posy-1)){
+	    System.out.println( maze[posx][posy-1]);
+	    return true;
+	}
+	return false;
+    }
+
     public boolean solve(){
         if(startx < 0){
             System.out.println("No starting point 'S' found in maze.");
@@ -49,7 +105,7 @@ public class Maze{
         }else{
             maze[startx][starty] = ' ';
             return solve(startx,starty);
-        }
+	}
     }
 
     /*
@@ -65,11 +121,12 @@ public class Maze{
         All visited spots that were not part of the solution are changed to '.'
         All visited spots that are part of the solution are changed to '@'
 
-    */
+ 
+	
     private boolean solve(int x, int y){
         if(animate){
             System.out.println(this);
-            wait(20);
+            //wait(20);
         }
 
         //COMPLETE SOLVE
@@ -81,12 +138,24 @@ public class Maze{
 
     //FREE STUFF!!! *you should be aware of this*
 
-
+    /*
     public void clearTerminal(){
         System.out.println(CLEAR_SCREEN);
     }
+    */
 
+    public String toString(){
+	String ans = "";
+	for(int r = 0; r < maze.length; r++){
+	    for(int c = 0; c < maze[0].length; c++){
+		ans+= maze[r][c];
+	    }
+	    ans+="\n";
+	}
+	return ans;
+    }
 
+    /*
     public String toString(){
         int maxx = maze.length;
         int maxy = maze[0].length;
@@ -134,7 +203,7 @@ public class Maze{
         catch (InterruptedException e) {
         }
     }
-
+*/
     
 
     //END FREE STUFF
