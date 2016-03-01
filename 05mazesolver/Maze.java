@@ -71,30 +71,36 @@ public class Maze{
        When no S is contained in maze, print an error and return false.
     */
 
-    public boolean solve(int posx, int posy){
+    private boolean solve(int posx, int posy){
+	if(animate){
+            System.out.println(this);
+            wait(20);
+        }
+
 	if (maze[posx][posy] == 'E'){
 	    return true;
 	}
-	if (maze[posx][posy] == '#'){
+	if (maze[posx][posy] == '#' || maze[posx][posy]=='@' || maze[posx][posy]=='.'){
 	    return false;
 	}
 	maze[posx][posy]='@';
-	if (posx+1<maze.length && maze[posx+1][posy] !='#' && solve(posx+1,posy)){
-	    System.out.println(maze[posx+1][posy]);
+	if (posx+1<maze.length && solve(posx+1,posy)){
+	    //System.out.println(maze[posx+1][posy]);
 	    return true;
 	}
-	if (posy+1<maze[0].length && maze[posx][posy+1]!='#' && solve(posx,posy+1)){
-	    System.out.println( maze[posx][posy+1]);
+	if (posy+1<maze[0].length && solve(posx,posy+1)){
+	    //System.out.println( maze[posx][posy+1]);
 	    return true;
 	}
-	if (posx-1>=0 && maze[posx-1][posy]!='#' && solve(posx-1,posy)){
-	    System.out.println(maze[posx-1][posy]);
+	if (posx-1>=0 && solve(posx-1,posy)){
+	    //System.out.println(maze[posx-1][posy]);
 	    return true;
 	}
-	if (posy-1>=0 && maze[startx][posy-1]!='#' && solve(posx,posy-1)){
-	    System.out.println( maze[posx][posy-1]);
+	if (posy-1>=0 && solve(posx,posy-1)){
+	    //System.out.println( maze[posx][posy-1]);
 	    return true;
 	}
+	maze[posx][posy]='.';
 	return false;
     }
 
@@ -120,30 +126,19 @@ public class Maze{
 
         All visited spots that were not part of the solution are changed to '.'
         All visited spots that are part of the solution are changed to '@'
-
+    */
  
 	
-    private boolean solve(int x, int y){
-        if(animate){
-            System.out.println(this);
-            //wait(20);
-        }
-
-        //COMPLETE SOLVE
-
-        return false; //so it compiles
-    }
-
 
 
     //FREE STUFF!!! *you should be aware of this*
 
-    /*
+    
     public void clearTerminal(){
         System.out.println(CLEAR_SCREEN);
     }
-    */
-
+    
+    /*
     public String toString(){
 	String ans = "";
 	for(int r = 0; r < maze.length; r++){
@@ -154,8 +149,9 @@ public class Maze{
 	}
 	return ans;
     }
-
-    /*
+    
+    */
+    
     public String toString(){
         int maxx = maze.length;
         int maxy = maze[0].length;
@@ -203,7 +199,7 @@ public class Maze{
         catch (InterruptedException e) {
         }
     }
-*/
+
     
 
     //END FREE STUFF
