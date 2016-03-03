@@ -53,29 +53,37 @@ public class Silver{
     }
 
     public boolean move(int x,int y){
+	int [][]temp= new int[field.length][field[0].length];
 	if (field [x][y] == -1 || field[x][y]==0){
 	    return false;
 	}
 	if (x-1<0 || field[x-1][y]==-1){
-	    field[x+1][y]+= field[x][y] ;
+	    temp[x+1][y]+= field[x][y] ;
 	}
 	if (x+1>field.length || field[x+1][y]==-1){
-	    field[x-1][y] += field[x][y] ;
+	    temp[x-1][y] += field[x][y] ;
 	}
 	if (y-1<0 || field[x][y-1]==-1){
-	    field[x][y+1] += field[x][y] ;
+	    temp[x][y+1] += field[x][y] ;
 	}
 	if (y+1>field.length || field[x][y+1]==-1){
-	    field[x][y-1] += field[x][y] ;
+	    temp[x][y-1] += field[x][y] ;
 		}
 	if (x !=0 && x != field.length && field[x-1][y]!=-1 && field[x+1][y]!=-1){
-	    field[x+1][y]+= field[x][y];
-	    field[x-1][y] += field[x][y] ;
+	    temp[x+1][y]+= field[x][y];
+	    temp[x-1][y] += field[x][y] ;
 	}
 	if (y !=0 && y != field.length && field[x][y-1]!=-1 && field[x][y+1]!=-1){
-	   field[x][y+1] += field[x][y] ;
-	   field[x][y-1] += field[x][y] ;
+	   temp[x][y+1] += field[x][y] ;
+	   temp[x][y-1] += field[x][y] ;
 	}
+	field=temp;
+	for (int a=0;a<temp.length;a++){
+	    for(int b=0;b<temp[0].length;b++){
+		field[a][b]+=temp[a][b];
+	    }
+	}
+	 System.out.println(toString());
 	field[x][y]=0;
 	return true;
     }
@@ -105,7 +113,8 @@ public class Silver{
 
     public static void main(String[]args){
 	Silver x= new Silver("ctravel.in");
-	System.out.println(x.solve());
+	x.solve();
+	//System.out.println(x.solve());
 	System.out.println(x);
     }
 }
