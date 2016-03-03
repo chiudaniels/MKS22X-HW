@@ -1,0 +1,26 @@
+import java.util.*;
+import java.io.*;
+
+public class Silver{
+    int [][] field;
+    int xstart;
+    int ystart;
+    int time;
+
+    public Silver(String filename){
+	File file= null;
+	Scanner sc= null;
+	try{
+	    file=new File(filename);
+	    sc = new Scanner (file);
+	    
+        }
+	catch (FileNotFoundException e){
+	}
+	height=sc.nextInt();
+	length=sc.nextInt();
+	time=sc.nextInt();
+	field = new int [height][length];
+	
+    }
+}

@@ -27,7 +27,7 @@ public class Maze{
 	animate = ani;
 	//
 	try{
-	    file=new File("data1.dat");
+	    file=new File(filename);
 	    sc = new Scanner (file);
 	    scheight= new Scanner (file);
 	    sclength= new Scanner (file);
