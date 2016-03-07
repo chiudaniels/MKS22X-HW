@@ -45,57 +45,40 @@ public class Silver{
 	field[xstart][ystart]=1;
     }
 
-    public boolean isOutBounds(int x, int y){
-	if (x-1<0 || x+1>field.length || y-1<0 || y+1>field[0].length){
-	    return false;
-	}
-	return true;
-    }
-
-    public boolean move(int x,int y){
+    public void move(){
 	int [][]temp= new int[field.length][field[0].length];
-	if (field [x][y] == -1 || field[x][y]==0){
-	    return false;
-	}
-	if (x-1<0 || field[x-1][y]==-1){
-	    temp[x+1][y]+= field[x][y] ;
-	}
-	if (x+1>field.length || field[x+1][y]==-1){
-	    temp[x-1][y] += field[x][y] ;
-	}
-	if (y-1<0 || field[x][y-1]==-1){
-	    temp[x][y+1] += field[x][y] ;
-	}
-	if (y+1>field.length || field[x][y+1]==-1){
-	    temp[x][y-1] += field[x][y] ;
+	int count=0;
+	for (int x=0;x<field.length;x++){
+	    for (int y=0;y<field[0].length;y++){
+		count =0;
+		if (field[x][y]==0){
+		    if (x>0 && field[x-1][y]> 0){
+			count += temp[x-1][y];
+		    }
+		    if(x<field.length-1 && field[x+1][y]>0){
+			count += temp[x+1][y];
+		    }
+		    if (y>0 && field[x][y-1] > 0){
+			count += temp[x][y-1];
+		    }
+		    if(y<field.length-1 && field[x][y+1]>0){
+			count += temp[x][y+1];
+		    }
+		    if (field[x][y] != -1){
+			temp[x][y]=count;
+		    }
 		}
-	if (x !=0 && x != field.length && field[x-1][y]!=-1 && field[x+1][y]!=-1){
-	    temp[x+1][y]+= field[x][y];
-	    temp[x-1][y] += field[x][y] ;
-	}
-	if (y !=0 && y != field.length && field[x][y-1]!=-1 && field[x][y+1]!=-1){
-	   temp[x][y+1] += field[x][y] ;
-	   temp[x][y-1] += field[x][y] ;
-	}
-	field=temp;
-	for (int a=0;a<temp.length;a++){
-	    for(int b=0;b<temp[0].length;b++){
-		field[a][b]+=temp[a][b];
+		System.out.println(toString());
 	    }
 	}
-	 System.out.println(toString());
-	field[x][y]=0;
-	return true;
+	field = temp;
     }
 
     public int solve(){
-	for (int t= time; t>0;t--){
-	    for (int x=0;x<field.length-1;x++){
-		for (int y=0;y<field[0].length-1;y++){
-		    move(x,y);
-		}
-	    }
+	for (int t= 0; t<=time;t++){
+	    move();
 	}
+
 	return field[xend][yend];
     }
     
@@ -113,7 +96,9 @@ public class Silver{
 
     public static void main(String[]args){
 	Silver x= new Silver("ctravel.in");
-	x.solve();
+	x.move();
+	//x.solve();
+	System.out.println(x.time);
 	//System.out.println(x.solve());
 	System.out.println(x);
     }
