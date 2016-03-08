@@ -28,33 +28,45 @@ public class mergesort{
 	    }
 	}
 	else{
-	    while (counta+starta <= enda && startb+countb <= endb){
+	    while (counta+starta < enda && startb+countb < endb){
 		if (data[starta+counta]<data[startb+countb]){
 		    temp[counta+countb]=data[starta+counta];
 		    counta++;
+		    //System.out.println("counta");
+		    //System.out.println(counta);
 		}
 		if(data[startb+countb]<data[starta+counta]){
 		    temp[counta+countb]=data[startb+countb];
 		    countb++;
+		    //System.out.println("countb");
+		    //System.out.println(countb);
 		}
 		if(data[startb+countb]==data[starta+counta]){
 		    temp[counta+countb]=data[starta+counta];
 		    counta++;
+		    //System.out.println("counta");
+		    //System.out.println(counta);
 		    temp[counta+countb]=data[startb+countb];
 		    countb++;
+		    //System.out.println("countb");
+		    //System.out.println(countb);
 		}
-
 	    }
 	    if (counta+starta>enda){
-		while(countb+startb <= endb){
+		while(countb+startb < endb){
 		    temp[counta+countb]= data[startb+countb];
 		    countb++;
+		    //System.out.println("countb"); 
+		    //System.out.println(countb);
+
 		}
 	    }
 	    if (countb+startb>endb){
 		while(counta+starta <= enda){
 		    temp[counta+countb]= data[starta+counta];
 		    counta++;
+		    //System.out.println("countba");
+		    //System.out.println(counta);
 		}
 	    }
 	}
@@ -69,6 +81,9 @@ public class mergesort{
     }
 
     public void sortH(int[]data,int start, int end){
+	if (data.length==1){
+	    return;
+	}
 	if (start<end){
 	    int mid= start + (end-start)/2;
 	    sortH(data,start,mid);
@@ -101,7 +116,7 @@ public class mergesort{
 	int[]x= {1,7,2,3,9,5,4,13};
 	mergesort test=  new mergesort(x);
 	test.sort(test.array);
-	//test.merge(test.array,0,0,1,1);
+	//test.merge(test.array,0,3,4,7);
 	System.out.println(Arrays.toString(test.array));
     }
 }
