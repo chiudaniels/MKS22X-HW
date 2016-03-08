@@ -2,17 +2,22 @@ import java.util.Arrays;
 
 public class mergesort{
     int [] array;
+    
     public mergesort(int [] x){
 	array=x;
     }
     
     public void merge(int[]data, int starta, int enda,int startb, int endb){
+	System.out.println(starta);
+	System.out.println(enda);
+	System.out.println(startb);
+	System.out.println(endb);
 	int counta=0;
 	int countb=0;
 	int [] temp;
 	int mid=starta + (startb-starta)/2;
 	temp= new int [endb-starta+1];
-	if (data.length ==2){
+	if (2 == endb-starta+1){
 	    if (data[0]>data[1]){
 		temp[0]=data[1];
 		temp[1]=data[0];
@@ -56,12 +61,19 @@ public class mergesort{
 	for (int x=0;x<temp.length;x++){
 	    data[starta+x]=temp[x];
 	}
+	System.out.println(Arrays.toString(array));
     }
 
     public void sort(int [] data){
-	if (data.length>1){
-	    int mid=data.length/2;
-	    merge(data,0,mid,mid+1,data.length-1);
+	sortH(data,0,data.length-1);
+    }
+
+    public void sortH(int[]data,int start, int end){
+	if (start<end){
+	    int mid= start + (end-start)/2;
+	    sortH(data,start,mid);
+	    sortH(data,mid+1,end);
+	    merge(data,start,mid,mid+1,end);
 	}
     }
 
@@ -86,9 +98,10 @@ public class mergesort{
     
 
     public static void main (String [] args){
-	int[]x= {1,4,7,2,5,8};
+	int[]x= {1,7,2,3,9,5,4,13};
 	mergesort test=  new mergesort(x);
-	test.sort(x);
+	test.sort(test.array);
+	//test.merge(test.array,0,0,1,1);
 	System.out.println(Arrays.toString(test.array));
     }
 }
