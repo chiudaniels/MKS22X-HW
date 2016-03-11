@@ -55,7 +55,9 @@ public class Quick{
 	int pivot= data[randomnum];
 	int wall=left;
 	int currentpos=left;
-	//System.out.println(pivot);
+	System.out.println(left);
+	System.out.println(right);
+	System.out.println(pivot);
 	swap(data,randomnum,data.length-1);
 	while (currentpos<right){
 	    if (pivot < data[currentpos]){
@@ -66,9 +68,9 @@ public class Quick{
 		wall++;
 		currentpos++;
 	    }
-	    //System.out.println(Arrays.toString(data));
 	}
 	swap(data,wall,currentpos);
+	System.out.println(Arrays.toString(data));
 	return wall;
     }
     
@@ -83,7 +85,7 @@ public class Quick{
 	int x= partition(data,left,right);
 	if (x==k){
 	    return data[k];
-	}
+ 	}
 	if (x>k){
 	    return quickselect(data,k,left,x-1);
 	}
@@ -91,11 +93,24 @@ public class Quick{
 	    return quickselect(data,k,x+1,right);
 	}
     }
+    public void quickSort(int []data){
+	quickSort(data,0,data.length-1);
+    } 
+    
+    public void quickSort(int []data, int left, int right){
+	if (left < right){
+	    int count = partition(data, left, right);
+	    quickSort(data,left,count-1);
+	    quickSort(data,count+1,right);
+	}
+    }
 
     public static void main(String[]args){
 	Quick test= new Quick();
-	int[]x={1,9,5,7,3,2};
-	System.out.println(test.quickselect(x,2));
+	int[]x={8,7,6,5,4,3,2,1,0};
+	test.quickSort(x);
+	//test.partition(x,2,8);
+	//System.out.println(test.quickselect(x,2));
 	//test.quickselect(x,4);
 	System.out.println(Arrays.toString(x));
     }
