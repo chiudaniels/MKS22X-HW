@@ -6,7 +6,8 @@ public class mergesort{
     public mergesort(int [] x){
 	array=x;
     }
-    
+
+    /*
     public void merge(int[]data, int starta, int enda,int startb, int endb){
 	System.out.println(starta);
 	System.out.println(enda);
@@ -74,6 +75,19 @@ public class mergesort{
 	    data[starta+x]=temp[x];
 	}
 	System.out.println(Arrays.toString(array));
+    }
+    */
+
+    public void merge(int[]data, start, end){
+	int[]temp=data[data.length];
+	int mid = start+ (end-start)/2;
+	int leftpos=mid;
+	int rightpos=end;
+	while (rightpos+leftpos < end){
+	    if (data[leftpos]<data[rightpos]){
+		temp
+	    }
+	}
     }
 
     public void sort(int [] data){
