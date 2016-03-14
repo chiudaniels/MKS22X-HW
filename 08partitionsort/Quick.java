@@ -90,12 +90,9 @@ public class Quick{
 	for(int x=0;x<temp.length;x++){
 	    data[left+x]=temp[x];
 	}
-	//System.out.println(newArrayPosLeft);
-	//System.out.println(newArrayPosRight);
 	int[]results=new int[2];
 	results[0]=newArrayPosLeft;
 	results[1]=newArrayPosRight;
-	//System.out.println(Arrays.toString(temp));
 	return results;
     }
   
@@ -106,35 +103,26 @@ public class Quick{
     public void quickSort(int []data, int left, int right){
 	int [] count = partition(data, left, right);
 	if (left < count[0]){
-	    quickSort(data,left,count[0]);
+	    quickSort(data,left,count[0]-1);
 	}
 	if (count[1]+1<right){
 	    quickSort(data,count[1]+1,right);
 	}
+	//	System.out.println(Arrays.toString(data));
     }
 
 
     public static void main(String[]args){
 	Quick test= new Quick();
 	//int[]x={3,2,1,3,2,1,3,2,1};
-	//int[]x={8,7,7,5,5,3,3,2,1,0};
-	//test.quickSort(x);
+	int[]x={8,7,7,3,3,3,3,1,0};
+	test.quickSort(x);
 	//test.partition(x,8,8);
 	//test.partition(x,5,8);
 	//System.out.println(test.partition(x,2,8));
 	//System.out.println(test.quickselect(x,2));
 	//test.quickselect(x,4);
-	//System.out.println(Arrays.toString(x));
-	int[] d = new int [4000000];
-	int[] c = new int [d.length];
-
-	for(int i = 0; i < d.length; i++){
-	    d[i]= (int)(Math.random()*Integer.MAX_VALUE);
-	    c[i]= d[i];
-	}
-	test.quickSort(d); //or even your old quicksort!!!
-	Arrays.sort(c);
-	System.out.println("Done: Sorted="+Arrays.equals(d,c));
+	System.out.println(Arrays.toString(x));
     }
 
 }
