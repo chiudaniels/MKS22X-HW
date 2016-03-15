@@ -108,7 +108,7 @@ public class Quick{
 	if (count[1]+1<right){
 	    quickSort(data,count[1]+1,right);
 	}
-	//	System.out.println(Arrays.toString(data));
+	return;
     }
 
 
@@ -117,7 +117,7 @@ public class Quick{
 	//int[]x={3,2,1,3,2,1,3,2,1};
 	int[]x={8,7,7,3,3,3,3,1,0};
 	test.quickSort(x);
-	//test.partition(x,8,8);
+	//test.partition(x,3,6);
 	//test.partition(x,5,8);
 	//System.out.println(test.partition(x,2,8));
 	//System.out.println(test.quickselect(x,2));

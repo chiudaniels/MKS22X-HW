@@ -1,0 +1,31 @@
+public class MyLinkedList{
+    private LNode next;
+    private int size;
+
+    public MyLinkedList(int x, LNode y){
+	size=x;
+	next=y;
+    }
+
+    public LNode getNext(){
+	return next;
+    }
+    public int getSize(){
+	return size; 
+    }
+
+    public boolean add (int value){
+	if (next == null){
+	    next = MyLinkedList(value, null);
+	    size++;
+	    return true;
+	}
+	return false;
+    }
+
+    public String toString(){
+	String x= "[";
+	for (int count=0;count<size;x++){
+	}
+    }
+}
