@@ -1,0 +1,6 @@
+public class driver{
+    public static void main (String[]args){
+	MyLinkedList x= new MyLinkedList(0,null);
+	System.out.println(x);
+    }
+}

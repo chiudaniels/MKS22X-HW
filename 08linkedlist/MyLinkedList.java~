@@ -1,10 +1,10 @@
 public class MyLinkedList{
-    private LNode next;
+    private LNode start;
     private int size;
 
     public MyLinkedList(int x, LNode y){
 	size=x;
-	next=y;
+	start=y;
     }
 
     public LNode getNext(){
@@ -15,12 +15,6 @@ public class MyLinkedList{
     }
 
     public boolean add (int value){
-	if (next == null){
-	    next = MyLinkedList(value, null);
-	    size++;
-	    return true;
-	}
-	return false;
     }
 
     public String toString(){
