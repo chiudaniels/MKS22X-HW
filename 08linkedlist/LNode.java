@@ -1,9 +1,9 @@
-public class LNode{
-    private int value;
-    private LNode next;
-    private LNode previous;
+public class LNode <T>{
+    private T value;
+    private LNode<T> next;
+    private LNode<T> previous;
 
-    public LNode(int x, LNode y, LNode z){
+    public LNode(<T> x, LNode y, LNode z){
 	value = x;
 	next= y;
 	previous =z;
@@ -13,11 +13,11 @@ public class LNode{
 	value =x;
     }
 
-    public void setNext(LNode x){
+    public void setNext(LNode<T> x){
 	next=x;
     }
 
-    public void setValue(int x){
+    public void setValue(T x){
 	value=x;
     }
 
@@ -25,15 +25,15 @@ public class LNode{
 	return value;
     }
 
-    public LNode getNext(){
+    public LNode<T> getNext(){
 	return next;
     }
 
-    public void setPrevious(LNode x){
+    public void setPrevious(LNode<T> x){
 	previous = x;
     }
 
-    public LNode getPrevious(){
+    public LNode<T> getPrevious(){
 	return previous;
     }
 }

@@ -1,10 +1,10 @@
-public class MyLinkedList{
-    private LNode start;
+public class MyLinkedList<T>{
+    private LNode<T> start;
     private int size;
-    private LNode last;
+    private LNode<T> last;
 
     
-    public MyLinkedList(int x, LNode y){
+    public MyLinkedList(int x, LNode<T> y){
 	size=x;
 	start=y;
     }
@@ -15,13 +15,13 @@ public class MyLinkedList{
 
     public boolean add(int value){
 	if(start == null){
-	    start = new LNode(value);
+	    start = new LNode<T>(value);
 	}else{
-	    LNode p = start;			
+	    LNode<T> p = start;			
 	    while(p.getNext()!=null){
 		p = p.getNext();
 	    }
-	    p.setNext(new LNode(value,null,p));
+	    p.setNext(new LNode<T>(value,null,p));
 	    last = p.getNext();
 	}
 	size+=1;
@@ -30,7 +30,7 @@ public class MyLinkedList{
 
     public String toString(){
 	String ans = "[";
-	LNode p = start;
+	LNode<T> p = start;
 	while(p != null){
 	    ans += p.getValue();
 	    if(p.getNext()!= null){
@@ -42,7 +42,7 @@ public class MyLinkedList{
     }
 
     public int get(int index){
-	LNode current=start;
+	LNode<T> current=start;
 	for (int x=0; x<index;x++){
 	    current = current.getNext();
 	}
@@ -50,7 +50,7 @@ public class MyLinkedList{
     }
 
     public int set(int index, int newValue){
-	LNode current=start;
+	LNode<T> current=start;
 	for (int x=0; x<index;x++){
 	    current = current.getNext();
 	}
@@ -67,13 +67,13 @@ public class MyLinkedList{
 	    last=last.getPrevious();
 	}
 	else{
-	    LNode current=start;
+	    LNode<T> current=start;
 	    for (int x=0; x<index-1;x++){
 		current = current.getNext();
 	    }
-	    LNode previous= current;
-	    LNode toBeRemoved= previous.getNext();
-	    LNode next= toBeRemoved.getNext();
+	    LNode<T> previous= current;
+	    LNode<T> toBeRemoved= previous.getNext();
+	    LNode<T> next= toBeRemoved.getNext();
 	    previous.setNext(next);
 	    size--;
 	    result= toBeRemoved.getValue();
@@ -83,24 +83,24 @@ public class MyLinkedList{
 
     public boolean add(int index,int value){
 	if (index == size -1){
-	    last.setNext(new LNode(value,null,last));
+	    last.setNext(new LNode<T>(value,null,last));
 	    last= last.getNext();
 	}
 	else{
-	    LNode current=start;
+	    LNode<T> current=start;
 	    for (int x=0; x<index-1;x++){
 		current = current.getNext();
 	    }
-	    LNode previous= current;
-	    LNode next= previous.getNext();
-	    previous.setNext(new LNode(value,next,last));
+	    LNode<T> previous= current;
+	    LNode<T> next= previous.getNext();
+	    previous.setNext(new LNode<T>(value,next,last));
 	    size++;
 	}
 	return true;
     }
 
     public int indexOf(int value){
-	LNode current=start;
+	LNode<T> current=start;
 	int index=0;
 	while (index<size){
 	    if (current.getValue()== value){
