@@ -6,20 +6,25 @@ public class MyLinkedList{
 	size=x;
 	start=y;
     }
-
-    public LNode getNext(){
-	return next;
-    }
-    public int getSize(){
-	return size; 
-    }
-
+    
     public boolean add (int value){
+	if (start.getNext() == null){
+	    LNode x= new LNode(value,null);
+	    start.setNext(x);
+	    size++;
+	    return true;
+	}
+	return false;
     }
 
     public String toString(){
 	String x= "[";
-	for (int count=0;count<size;x++){
+	x+= start.getValue();
+	LNode temp=start.getNext();
+	for (int count=1;count<size;count++){
+	    temp = start.getNext();
+	    x+="," + start.getValue();
 	}
+	return x+"]";
     }
 }

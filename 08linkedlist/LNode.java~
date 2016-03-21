@@ -7,6 +7,10 @@ public class LNode{
 	next= y; 
     }
 
+    public LNode(int x){
+	value =x;
+    }
+
     public void setNext(LNode x){
 	next=x;
     }
@@ -19,7 +23,7 @@ public class LNode{
 	return value;
     }
 
-    public int getNext(){
+    public LNode getNext(){
 	return next;
     }
 }
