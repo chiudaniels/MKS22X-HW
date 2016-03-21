@@ -1,30 +1,116 @@
 public class MyLinkedList{
     private LNode start;
     private int size;
+    private LNode last;
 
+    
     public MyLinkedList(int x, LNode y){
 	size=x;
 	start=y;
     }
-    
-    public boolean add (int value){
-	if (start.getNext() == null){
-	    LNode x= new LNode(value,null);
-	    start.setNext(x);
-	    size++;
-	    return true;
+
+    public int size(){
+	return size;
+    }
+
+    public boolean add(int value){
+	if(start == null){
+	    start = new LNode(value);
+	}else{
+	    LNode p = start;			
+	    while(p.getNext()!=null){
+		p = p.getNext();
+	    }
+	    p.setNext(new LNode(value,null,p));
+	    last = p.getNext();
 	}
-	return false;
+	size+=1;
+	return true;
     }
 
     public String toString(){
-	String x= "[";
-	x+= start.getValue();
-	LNode temp=start.getNext();
-	for (int count=1;count<size;count++){
-	    temp = start.getNext();
-	    x+="," + start.getValue();
+	String ans = "[";
+	LNode p = start;
+	while(p != null){
+	    ans += p.getValue();
+	    if(p.getNext()!= null){
+		ans+=", ";
+	    }
+	    p = p.getNext();
 	}
-	return x+"]";
+	return ans+"]";
+    }
+
+    public int get(int index){
+	LNode current=start;
+	for (int x=0; x<index;x++){
+	    current = current.getNext();
+	}
+	return current.getValue();
+    }
+
+    public int set(int index, int newValue){
+	LNode current=start;
+	for (int x=0; x<index;x++){
+	    current = current.getNext();
+	}
+	int old= current.getValue();
+	current.setValue(newValue);
+	return old;
+    }
+
+    public int remove(int index){
+	int result;
+	if (index == size-1){
+	    result=last.getValue();
+	    last.getPrevious().setNext(null);
+	    last=last.getPrevious();
+	}
+	else{
+	    LNode current=start;
+	    for (int x=0; x<index-1;x++){
+		current = current.getNext();
+	    }
+	    LNode previous= current;
+	    LNode toBeRemoved= previous.getNext();
+	    LNode next= toBeRemoved.getNext();
+	    previous.setNext(next);
+	    size--;
+	    result= toBeRemoved.getValue();
+	}
+	return result;
+    }
+
+    public boolean add(int index,int value){
+	if (index == size -1){
+	    last.setNext(new LNode(value,null,last));
+	    last= last.getNext();
+	}
+	else{
+	    LNode current=start;
+	    for (int x=0; x<index-1;x++){
+		current = current.getNext();
+	    }
+	    LNode previous= current;
+	    LNode next= previous.getNext();
+	    previous.setNext(new LNode(value,next,last));
+	    size++;
+	}
+	return true;
+    }
+
+    public int indexOf(int value){
+	LNode current=start;
+	int index=0;
+	while (index<size){
+	    if (current.getValue()== value){
+		return index;
+	    }
+	    else{
+		current = current.getNext();
+		index++;
+	    }
+	}
+	return -1;
     }
 }
