@@ -60,19 +60,25 @@ public class MyLinkedList{
     }
 
     public int remove(int index){
+	int result;
 	if (index == size-1){
+	    result=last.getValue();
 	    last.getPrevious().setNext(null);
+	    last=last.getPrevious();
 	}
-	LNode current=start;
-	for (int x=0; x<index-1;x++){
-	    current = current.getNext();
+	else{
+	    LNode current=start;
+	    for (int x=0; x<index-1;x++){
+		current = current.getNext();
+	    }
+	    LNode previous= current;
+	    LNode toBeRemoved= previous.getNext();
+	    LNode next= toBeRemoved.getNext();
+	    previous.setNext(next);
+	    size--;
+	    result= toBeRemoved.getValue();
 	}
-	LNode previous= current;
-	LNode toBeRemoved= previous.getNext();
-	LNode next= toBeRemoved.getNext();
-	previous.setNext(next);
-	size--;
-	return toBeRemoved.getValue();
+	return result;
     }
 
     public boolean add(int index,int value){
@@ -80,14 +86,16 @@ public class MyLinkedList{
 	    last.setNext(new LNode(value,null,last));
 	    last= last.getNext();
 	}
-  	LNode current=start;
-	for (int x=0; x<index-1;x++){
-	    current = current.getNext();
+	else{
+	    LNode current=start;
+	    for (int x=0; x<index-1;x++){
+		current = current.getNext();
+	    }
+	    LNode previous= current;
+	    LNode next= previous.getNext();
+	    previous.setNext(new LNode(value,next,last));
+	    size++;
 	}
-	LNode previous= current;
-	LNode next= previous.getNext();
-	previous.setNext(new LNode(value,next,last));
-	size++;
 	return true;
     }
 
