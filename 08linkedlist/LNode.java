@@ -3,13 +3,13 @@ public class LNode <T>{
     private LNode<T> next;
     private LNode<T> previous;
 
-    public LNode(<T> x, LNode y, LNode z){
+    public LNode(T x, LNode y, LNode z){
 	value = x;
 	next= y;
 	previous =z;
     }
 
-    public LNode(int x){
+    public LNode(T x){
 	value =x;
     }
 
@@ -21,7 +21,7 @@ public class LNode <T>{
 	value=x;
     }
 
-    public int getValue(){
+    public T getValue(){
 	return value;
     }
 
