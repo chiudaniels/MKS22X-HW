@@ -1,16 +1,18 @@
 public class driver{
     public static void main (String[]args){
-	LNode n= new LNode(1,null);
+	LNode n= new LNode("hello");
 	MyLinkedList x= new MyLinkedList(1,n);
-	x.add(2);
-	x.add(3);
-	x.set(1,1);
+	x.add("b");
+	System.out.println(x.size());
+	x.add("c");
+	System.out.println(x.size());
+	x.set(1,"d");
 	x.remove(2);
-	x.add(2,2);
-	System.out.println(x.indexOf(2));
+	x.add(2,"d");
+	System.out.println(x.indexOf("c"));
 	System.out.println(x);
 	System.out.println(x.get(0));
-	System.out.println(x.get(1));
+	System.out.println(x.get(2));
 	
     }
 }
