@@ -18,7 +18,7 @@ public class MyLinkedList<T>{
     }
 
     public boolean add(T value){
-	if(start.equals( null)){
+	if(start==null){
 	    start = new LNode<T>(value);
 	}else{
 	    LNode<T> p = start;			
@@ -54,6 +54,9 @@ public class MyLinkedList<T>{
     }
 
     public T set(int index, T newValue){
+	if (index<0 || index>size){
+	    throw new IndexOutOfBoundsException();
+	}
 	LNode<T> current=start;
 	for (int x=0; x<index;x++){
 	    current = current.getNext();
@@ -65,7 +68,10 @@ public class MyLinkedList<T>{
 
     public T remove(int index){
 	T result;
-	if (index== size-1){
+	if (index<0 || index>size){
+	    throw new IndexOutOfBoundsException();
+	}
+	if (index== size){
 	    result=last.getValue();
 	    last.getPrevious().setNext(null);
 	    last=last.getPrevious();
@@ -86,6 +92,10 @@ public class MyLinkedList<T>{
     }
 
     public boolean add(int index,T value){
+	if (index<0 || index>size){
+	    return false;
+	}
+   
 	if (index== size -1){
 	    last.setNext(new LNode<T>(value,null,last));
 	    last= last.getNext();
@@ -116,5 +126,10 @@ public class MyLinkedList<T>{
 	    }
 	}
 	return -1;
+    }
+
+    public static void main(String[]args){
+	MyLinkedList<String> m = new MyLinkedList<String>();
+	m.add("Hi");
     }
 }
