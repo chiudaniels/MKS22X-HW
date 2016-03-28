@@ -8,15 +8,29 @@ public class MyLinkedList<T> implements Iterable<T>{
     public MyLinkedList(){
     }
 
-    public Iterator<T> iterable(){
+    public Iterator <T> iterator(){
 	return new X();
     }
 
     public class X implements Iterator<T>{
-	LNodes<T> current;
-	public boolean hasNext(){
+	LNode<T> next;
+	public X(){
+	    next=start;
 	}
-	    
+	public boolean hasNext(){
+	    return next != start;
+	}
+	public T next(){
+	    if (!hasNext()){
+		throw new NoSuchElementException();
+	    }
+	    T value= next.getValue();
+	    next = next.getNext();
+	    return value;
+	}
+	public void remove(){
+	    throw new UnsupportedOperationException();
+	}
     }
     
     public MyLinkedList(LNode<T> y){
@@ -82,10 +96,14 @@ public class MyLinkedList<T> implements Iterable<T>{
 	if (index<0 || index>size){
 	    throw new IndexOutOfBoundsException();
 	}
-	if (index== size){
+	if (index==size-1){
 	    result=last.getValue();
 	    last.getPrevious().setNext(null);
 	    last=last.getPrevious();
+	}
+	else if (index == 0){
+	    result= start.getValue();
+	    start=start.getNext();
 	}
 	else{
 	    LNode<T> current=start;
@@ -107,7 +125,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 	    return false;
 	}
    
-	if (index== size -1){
+	if (index== size){
 	    last.setNext(new LNode<T>(value,null,last));
 	    last= last.getNext();
 	}
@@ -141,6 +159,13 @@ public class MyLinkedList<T> implements Iterable<T>{
 
     public static void main(String[]args){
 	MyLinkedList<String> m = new MyLinkedList<String>();
-	m.add("Hi");
+	m.add("a");
+	m.add("b");
+	m.add("c");
+	m.add("d");
+	m.add("e");
+	System.out.println(m);
+	System.out.println(m.remove(5));
+	System.out.println(m);
     }
 }

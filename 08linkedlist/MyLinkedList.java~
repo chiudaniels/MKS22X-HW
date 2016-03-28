@@ -1,11 +1,22 @@
 import java.util.*;
 
-public class MyLinkedList<T>{
+public class MyLinkedList<T> implements Iterable<T>{
     private LNode<T> start;
     private int size;
     private LNode<T> last;
 
     public MyLinkedList(){
+    }
+
+    public Iterator<T> iterable(){
+	return new X();
+    }
+
+    public class X implements Iterator<T>{
+	LNodes<T> current;
+	public boolean hasNext(){
+	}
+	    
     }
     
     public MyLinkedList(LNode<T> y){
