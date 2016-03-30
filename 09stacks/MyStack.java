@@ -49,4 +49,17 @@ public class MyStack<T>{
     public boolean isEmpty(){
 	return size()==0;
     }
+
+    public static void main (String[]args){
+	new int [] testnums= [2000];
+	Stack<Integer> s= new Stack<Integer>();
+	MyStack<Integer> t= new MyStack<Integer>();
+	for (x=0;x<testnums.length;x++){
+	    int [x]=Math.random()*10;
+	}
+	for (x=0;x<testnums.length;x++){
+	    s.push(testnums[x]);
+	    t.push(testnums[x]);
+	}       
+    }
 }
