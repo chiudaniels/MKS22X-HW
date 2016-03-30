@@ -1,0 +1,7 @@
+public class ParenDemo <T>{
+    private MyStacks<T> stack;
+    public boolean isMatching (String s){
+	char [] array = s.toCharArray();
+	if 
+    }
+}
