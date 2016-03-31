@@ -54,12 +54,22 @@ public class MyStack<T>{
 	new int [] testnums= [2000];
 	Stack<Integer> s= new Stack<Integer>();
 	MyStack<Integer> t= new MyStack<Integer>();
+	int test=0;
 	for (x=0;x<testnums.length;x++){
 	    int [x]=Math.random()*10;
 	}
 	for (x=0;x<testnums.length;x++){
 	    s.push(testnums[x]);
 	    t.push(testnums[x]);
-	}       
+	}
+        while (!s.isEmpty()){
+	    if(s.pop() != t.pop()){
+		test++;
+	    }
+	    else{
+		s.pop();
+		t.pop();
+	    }
+	}
     }
 }

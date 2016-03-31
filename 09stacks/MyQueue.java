@@ -49,4 +49,27 @@ public class MyQueue<T>{
     public boolean isEmpty(){
 	return size()==0;
     }
+
+     public static void main (String[]args){
+	new int [] testnums= [2000];
+	Queue<Integer> s= new Queue<Integer>();
+	MyQueue<Integer> t= new MyQueue<Integer>();
+	int test=0;
+	for (x=0;x<testnums.length;x++){
+	    int [x]=Math.random()*10;
+	}
+	for (x=0;x<testnums.length;x++){
+	    s.push(testnums[x]);
+	    t.push(testnums[x]);
+	}
+        while (!s.isEmpty()){
+	    if(s.pop() != t.pop()){
+		test++;
+	    }
+	    else{
+		s.pop();
+		t.pop();
+	    }
+	}
+    }
 }

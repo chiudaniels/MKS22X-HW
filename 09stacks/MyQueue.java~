@@ -1,7 +1,9 @@
+import java.util.*;
+
 public class MyQueue<T>{
     private MyLinkedList <T> list;
 
-    public MyStacks(MyLinkedList<T> x){
+    public MyQueue(MyLinkedList<T> x){
 	list =x;
     }
 
@@ -18,9 +20,9 @@ public class MyQueue<T>{
      */
     public T dequeue(){
 	if (isEmpty()){
-	    throw new NoSuchElementException;
+	    throw new NoSuchElementException();
 	}
-	list.remove(0);
+	return list.remove(0);
     }
 
     /**
@@ -29,9 +31,9 @@ public class MyQueue<T>{
      */
     public T peek(){
 	if (isEmpty()){
-	    throw new NoSuchElementException;
+	    throw new NoSuchElementException();
 	}
-	list.get(0);
+	return list.get(0);
     }
 
     /**

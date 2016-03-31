@@ -1,23 +1,28 @@
 public class ParenDemo{
-    public static  MyStack <Character> stack;
     public static boolean isMatching (String s){
+	MyStack <Character> stack = new MyStack<Charachter>();
 	char [] array = s.toCharArray();
 	System.out.println(array[0]);
 	for (int x=0; x< array.length; x++){
 	    if (array[x] == '(' || array[x] == '{' || array[x] == '[' || array[x] == '<'){
 		stack.push(array[x]);
 	    }
-	    if (!stack.isEmpty() && stack.peek()=='(' && array[x]==')'){
-		stack.pop();
-	    }
-	    if (!stack.isEmpty() && stack.peek()=='{' && array[x]=='}'){
-		stack.pop();
-	    }
-	    if (!stack.isEmpty() && stack.peek()=='[' && array[x]==']'){
-		stack.pop();
-	    }
-	    if (!stack.isEmpty() && stack.peek()=='<' && array[x]=='>'){
-		stack.pop();
+	    if (array[x] == ')' || array[x] == '}' || array[x] == ']' || array[x] == '>'){
+		if (!stack.isEmpty() && stack.peek()=='(' && array[x]==')'){
+		    stack.pop();
+		}
+		if (!stack.isEmpty() && stack.peek()=='{' && array[x]=='}'){
+		    stack.pop();
+		}
+		if (!stack.isEmpty() && stack.peek()=='[' && array[x]==']'){
+		    stack.pop();
+		}
+		if (!stack.isEmpty() && stack.peek()=='<' && array[x]=='>'){
+		    stack.pop();
+		}
+		else{
+		    return false;
+		}
 	    }
 	}
 	return stack.isEmpty();

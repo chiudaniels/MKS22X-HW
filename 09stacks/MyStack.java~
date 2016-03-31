@@ -1,7 +1,9 @@
+import java.util.*;
+
 public class MyStack<T>{
     private MyLinkedList <T> list;
 
-    public MyStacks(MyLinkedList<T> x){
+    public MyStack(MyLinkedList<T> x){
 	list =x;
     }
 
@@ -18,9 +20,9 @@ public class MyStack<T>{
      */
     public T pop(){
 	if (size()==0){
-	    throw new NoSuchElementException;
+	    throw new NoSuchElementException();
 	}
-	list.remove(0);
+	return list.remove(0);
     }
 
     /**
@@ -29,7 +31,7 @@ public class MyStack<T>{
      */
     public T peek(){
 	if (size()==0){
-	    throw new NoSuchElementException;
+	    throw new NoSuchElementException();
 	}
 	return list.get(0);
     }
@@ -46,5 +48,18 @@ public class MyStack<T>{
      */
     public boolean isEmpty(){
 	return size()==0;
+    }
+
+    public static void main (String[]args){
+	new int [] testnums= [2000];
+	Stack<Integer> s= new Stack<Integer>();
+	MyStack<Integer> t= new MyStack<Integer>();
+	for (x=0;x<testnums.length;x++){
+	    int [x]=Math.random()*10;
+	}
+	for (x=0;x<testnums.length;x++){
+	    s.push(testnums[x]);
+	    t.push(testnums[x]);
+	}       
     }
 }
