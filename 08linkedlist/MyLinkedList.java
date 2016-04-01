@@ -137,6 +137,10 @@ public class MyLinkedList<T> implements Iterable<T>{
 	    last.setNext(new LNode<T>(value,null,last));
 	    last= last.getNext();
 	}
+	else if (index == 0){
+	    LNode temp= start;
+	    start = new LNode<T>(value,temp,null);
+	}
 	else{
 	    LNode<T> current=start;
 	    for (int x=0; x<index-1;x++){
@@ -174,8 +178,8 @@ public class MyLinkedList<T> implements Iterable<T>{
             m.add(""+i);
         }
 	
-	System.out.println(n.remove(n.size()-1));
-        System.out.println(m.remove(m.size()-1));
+	n.add(1,"hi");
+	m.add(1,"hi");
 	System.out.println(m);
 	System.out.println(n);
     }
