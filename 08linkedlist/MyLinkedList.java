@@ -3,7 +3,7 @@ import java.util.*;
 public class MyLinkedList<T> implements Iterable<T>{
     private LNode<T> start;
     private int size;
-    private LNode<T> last;
+    public LNode<T> last;
 
     public MyLinkedList(){
     }
@@ -93,18 +93,26 @@ public class MyLinkedList<T> implements Iterable<T>{
 
     public T remove(int index){
 	T result;
+	//System.out.println("Index:" + index);
+	//System.out.println("Size:"+ size);
 	if (index<0 || index>size){
 	    throw new IndexOutOfBoundsException();
 	}
-	if (index==size-1){
+	
+	if (index == size()-1){
+	    //System.out.println("Hi!");
+	    size--;
 	    result=last.getValue();
 	    last.getPrevious().setNext(null);
 	    last=last.getPrevious();
 	}
+	
 	else if (index == 0){
+	    size--;
 	    result= start.getValue();
 	    start=start.getNext();
 	}
+	
 	else{
 	    LNode<T> current=start;
 	    for (int x=0; x<index-1;x++){
@@ -158,14 +166,17 @@ public class MyLinkedList<T> implements Iterable<T>{
     }
 
     public static void main(String[]args){
-	MyLinkedList<String> m = new MyLinkedList<String>();
-	m.add("a");
-	m.add("b");
-	m.add("c");
-	m.add("d");
-	m.add("e");
+        MyLinkedList<String> m = new MyLinkedList<String>();
+        ArrayList<String>    n = new ArrayList<String>();
+
+        for(int i = 0; i < 10; i++){
+            n.add(""+i);
+            m.add(""+i);
+        }
+	
+	System.out.println(n.remove(n.size()-1));
+        System.out.println(m.remove(m.size()-1));
 	System.out.println(m);
-	System.out.println(m.remove(5));
-	System.out.println(m);
+	System.out.println(n);
     }
 }
