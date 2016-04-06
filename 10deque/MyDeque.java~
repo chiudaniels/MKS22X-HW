@@ -45,6 +45,9 @@ public class MyDeque<T>{
     }
 
     private T removeFirst(){
+	if (start==end){
+	    throw new NoSuchElementException();
+	}
 	T result = data[start];
 	data[start]=null;
 	start++;
@@ -52,10 +55,27 @@ public class MyDeque<T>{
     }
 
     private T removeLast(){
+	if (start==end){
+	    throw new NoSuchElementException();
+	}
 	T result = data[last];
 	data[last]=null;
 	last--;
 	return result;
+    }
+
+    public T getFirst(){
+	if (start==end){
+	    throw new NoSuchElementException();
+	}
+	return data[start];
+    }
+
+    public T getLast(){
+	if (start==end){
+	    throw new NoSuchElementException();
+	}
+	return data[last];
     }
 
     private void resize(){

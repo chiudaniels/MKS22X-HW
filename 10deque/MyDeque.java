@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MyDeque<T>{
     //generic array
     T[] data;
@@ -20,11 +22,11 @@ public class MyDeque<T>{
 	return data[0];
     }
     
-    private addLast(T value){
-	if ((start == 0 && end == data.size-1) || end+1 == start){
+    private void addLast(T value){
+	if ((start == 0 && end == data.length-1) || end+1 == start){
 	    resize();
 	}
-	if (end == data.size-1){
+	if (end == data.length-1){
 	    data[0]=value;
 	    end=0;
 	}
@@ -32,13 +34,13 @@ public class MyDeque<T>{
 	end++;
     }
 
-    private addFirst(T value){
-	if ((start == 0 && end == data.size-1) || end == start-1){
+    private void addFirst(T value){
+	if ((start == 0 && end == data.length-1) || end == start-1){
 	    resize();
 	}
 	if (start==0){
-	    data[data.size-1]=value;
-	    start=data.size-1;
+	    data[data.length-1]=value;
+	    start=data.length-1;
 	}
 	data[start-1]=value;
 	start--;
@@ -58,9 +60,9 @@ public class MyDeque<T>{
 	if (start==end){
 	    throw new NoSuchElementException();
 	}
-	T result = data[last];
-	data[last]=null;
-	last--;
+	T result = data[end];
+	data[end]=null;
+	end--;
 	return result;
     }
 
@@ -75,27 +77,26 @@ public class MyDeque<T>{
 	if (start==end){
 	    throw new NoSuchElementException();
 	}
-	return data[last];
+	return data[end];
     }
 
     private void resize(){
-	temp= (T[]) new Object[data.size*2];
+	T[] temp= (T[]) new Object[data.length*2];
 	int newstart =0;
-	for (int x= start; x<data.size-1;x++){
+	for (int x= start; x<data.length-1;x++){
 	    temp[newstart]=data[x];
 	    newstart++;
 	}
-	for (int y=0; t<=end;y++){
+	for (int y=0; y<=end;y++){
 	    temp[newstart]=data[y];
 	    newstart++;
 	}
-	date=temp;
+	data=temp;
     }
     
     public static void main(String[]args){
-	Tester<String> x = new Tester<String>();
+	MyDeque<String> x = new MyDeque<String>();
 	x.add("fish");
 	System.out.println(x.get());
     }
-}
 }
