@@ -1,8 +1,10 @@
+import java.util.*;
+
 public class MyDeque<T>{
     //generic array
-    T[] data;
-    int start;
-    int end;
+    public T[] data;
+    public int start;
+    public int end;
 
     //suppress this ONE function from
     //having warnings.
@@ -20,31 +22,35 @@ public class MyDeque<T>{
 	return data[0];
     }
     
-    private addLast(T value){
-	if ((start == 0 && end == data.size-1) || end+1 == start){
+    public void addLast(T value){
+	if ((start == 0 && end == data.length-1) || end+1 == start){
 	    resize();
 	}
-	if (end == data.size-1){
+	if (end == data.length-1){
 	    data[0]=value;
 	    end=0;
 	}
-	data[end+1]=value;
-	end++;
+	else{
+	    data[end+1]=value;
+	    end++;
+	}
     }
 
-    private addFirst(T value){
-	if ((start == 0 && end == data.size-1) || end == start-1){
+    public void addFirst(T value){
+	if ((start == 0 && end == data.length-1) || end == start-1){
 	    resize();
 	}
 	if (start==0){
-	    data[data.size-1]=value;
-	    start=data.size-1;
+	    data[data.length-1]=value;
+	    start=data.length-1;
 	}
-	data[start-1]=value;
-	start--;
+	else{
+	    data[start-1]=value;
+	    start--;
+	}
     }
 
-    private T removeFirst(){
+    public T removeFirst(){
 	if (start==end){
 	    throw new NoSuchElementException();
 	}
@@ -54,13 +60,13 @@ public class MyDeque<T>{
 	return result;
     }
 
-    private T removeLast(){
+    public T removeLast(){
 	if (start==end){
 	    throw new NoSuchElementException();
 	}
-	T result = data[last];
-	data[last]=null;
-	last--;
+	T result = data[end];
+	data[end]=null;
+	end--;
 	return result;
     }
 
@@ -75,27 +81,64 @@ public class MyDeque<T>{
 	if (start==end){
 	    throw new NoSuchElementException();
 	}
-	return data[last];
+	return data[end];
     }
 
+    public String toString(){
+	String ans="[";
+	for (int x=0;x<data.length;x++){
+	    ans += data[x] +",";
+	}
+	return ans + "]";
+    }
+    
+    @SuppressWarnings("unchecked")
     private void resize(){
-	temp= (T[]) new Object[data.size*2];
+	T[] temp= (T[]) new Object[data.length*2];
 	int newstart =0;
-	for (int x= start; x<data.size-1;x++){
+	for (int x= start; x<data.length;x++){
 	    temp[newstart]=data[x];
 	    newstart++;
 	}
-	for (int y=0; t<=end;y++){
+	for (int y=0; y<=end;y++){
 	    temp[newstart]=data[y];
 	    newstart++;
 	}
-	date=temp;
+	start = 0;
+	end = newstart;
+	data=temp;
+    }
+
+    public boolean isEmpty(){
+	return start == end;
     }
     
     public static void main(String[]args){
-	Tester<String> x = new Tester<String>();
-	x.add("fish");
-	System.out.println(x.get());
+	MyDeque<String> x = new MyDeque<String>();
+	x.addFirst("a");
+		System.out.println(x.start);
+	x.addFirst("b");
+		System.out.println(x.start);
+	x.addFirst("c");
+		System.out.println(x.start);
+	x.addFirst("d");
+		System.out.println(x.start);
+	x.addFirst("e");
+		System.out.println(x.start);
+	x.addFirst("f");
+		System.out.println(x.start);
+	x.addFirst("g");
+		System.out.println(x.start);
+	x.addFirst("h");
+		System.out.println(x.start);
+	x.addFirst("i");
+		System.out.println(x.start);
+	x.addFirst("j");
+		System.out.println(x.start);
+	x.addFirst("k");
+
+	System.out.println(x.start);
+	System.out.println(x.end);
+	System.out.println(x);
     }
-}
 }

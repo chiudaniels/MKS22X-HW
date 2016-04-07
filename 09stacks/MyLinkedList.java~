@@ -132,11 +132,8 @@ public class MyLinkedList<T> implements Iterable<T>{
 	if (index<0 || index>size){
 	    return false;
 	}
-	if (index == 0){
-	    LNode temp= start;
-	    start=new LNode<T>(value,temp,null);
-	}
-	else if (index== size){
+   
+	if (index== size){
 	    last.setNext(new LNode<T>(value,null,last));
 	    last= last.getNext();
 	}
@@ -177,8 +174,8 @@ public class MyLinkedList<T> implements Iterable<T>{
             m.add(""+i);
         }
 	
-	n.add(0,"hi");
-        m.add(0,"hi");
+	System.out.println(n.remove(n.size()-1));
+        System.out.println(m.remove(m.size()-1));
 	System.out.println(m);
 	System.out.println(n);
     }

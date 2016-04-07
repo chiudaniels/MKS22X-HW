@@ -2,9 +2,9 @@ import java.util.*;
 
 public class MyDeque<T>{
     //generic array
-    T[] data;
-    int start;
-    int end;
+    public T[] data;
+    public int start;
+    public int end;
 
     //suppress this ONE function from
     //having warnings.
@@ -22,7 +22,7 @@ public class MyDeque<T>{
 	return data[0];
     }
     
-    private void addLast(T value){
+    public void addLast(T value){
 	if ((start == 0 && end == data.length-1) || end+1 == start){
 	    resize();
 	}
@@ -30,11 +30,13 @@ public class MyDeque<T>{
 	    data[0]=value;
 	    end=0;
 	}
-	data[end+1]=value;
-	end++;
+	else{
+	    data[end+1]=value;
+	    end++;
+	}
     }
 
-    private void addFirst(T value){
+    public void addFirst(T value){
 	if ((start == 0 && end == data.length-1) || end == start-1){
 	    resize();
 	}
@@ -42,11 +44,13 @@ public class MyDeque<T>{
 	    data[data.length-1]=value;
 	    start=data.length-1;
 	}
-	data[start-1]=value;
-	start--;
+	else{
+	    data[start-1]=value;
+	    start--;
+	}
     }
 
-    private T removeFirst(){
+    public T removeFirst(){
 	if (start==end){
 	    throw new NoSuchElementException();
 	}
@@ -56,7 +60,7 @@ public class MyDeque<T>{
 	return result;
     }
 
-    private T removeLast(){
+    public T removeLast(){
 	if (start==end){
 	    throw new NoSuchElementException();
 	}
@@ -80,10 +84,19 @@ public class MyDeque<T>{
 	return data[end];
     }
 
+    public String toString(){
+	String ans="[";
+	for (int x=0;x<data.length;x++){
+	    ans += data[x] +",";
+	}
+	return ans + "]";
+    }
+    
+    @SuppressWarnings("unchecked")
     private void resize(){
 	T[] temp= (T[]) new Object[data.length*2];
 	int newstart =0;
-	for (int x= start; x<data.length-1;x++){
+	for (int x= start; x<data.length;x++){
 	    temp[newstart]=data[x];
 	    newstart++;
 	}
@@ -91,12 +104,31 @@ public class MyDeque<T>{
 	    temp[newstart]=data[y];
 	    newstart++;
 	}
+	start = 0;
+	end = newstart;
 	data=temp;
+    }
+
+    public boolean isEmpty(){
+	return start == end;
     }
     
     public static void main(String[]args){
 	MyDeque<String> x = new MyDeque<String>();
-	x.add("fish");
-	System.out.println(x.get());
+	x.addFirst("a");
+	x.addFirst("b");
+	x.addFirst("c");
+	x.addFirst("d");
+	x.addFirst("e");
+	x.addFirst("f");
+	x.addFirst("g");
+	x.addFirst("h");
+	x.addFirst("i");
+	x.addFirst("j");
+	x.addFirst("k");
+
+	System.out.println(x.start);
+	System.out.println(x.end);
+	System.out.println(x);
     }
 }
