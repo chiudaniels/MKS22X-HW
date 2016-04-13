@@ -1,9 +1,9 @@
 import java.util.*;
 public class FrontierQueue<T> implements Frontier <T>{
-    private Queue<T> frontier;
+    private MyQueue<T> frontier;
 
     public void add(T element){
-	frontier.push(element);
+	frontier.enqueue(element);
     }
     public T next(){
 	return frontier.peek();
@@ -12,3 +12,4 @@ public class FrontierQueue<T> implements Frontier <T>{
 	return frontier.peek() == null;
     }
 }
+

@@ -3,7 +3,26 @@ import java.io.*;
 
 public class BetterMaze{
     private class Node{
+	private Node prev;
+	private int x,y;
+	
+	public BetterMaze(int row, int col, Node previous){
+	    x=row;
+	    y=col;
+	    prev=previous;
+	}
 
+	public int getX(){
+	    return x;
+	}
+	
+	public int getY(){
+	    return y;
+	}
+
+	public Node getPrev(){
+	    return prev;
+	}
     }
 
     private char[][] maze;
@@ -21,7 +40,6 @@ public class BetterMaze{
      *Postcondition:  the correct solution is in the returned array
     **/
     public int[] solutionCoordinates(){
-        /** IMPLEMENT THIS **/      
 	return new int[1];
     }    
 
@@ -29,16 +47,16 @@ public class BetterMaze{
     /**initialize the frontier as a queue and call solve
     **/
     public boolean solveBFS(){  
-        /** IMPLEMENT THIS **/      
-	return false;
+        placesToGo  = new FrontierQueue();     
+	return solve();
     }   
 
 
    /**initialize the frontier as a stack and call solve
     */ 
     public boolean solveDFS(){  
-        /** IMPLEMENT THIS **/  
-	return false;
+        placesToGo = new FrontierStack();  
+	return solve();
     }    
 
    /**Search for the end of the maze using the frontier. 
@@ -47,7 +65,25 @@ public class BetterMaze{
     private boolean solve(){  
         /** IMPLEMENT THIS **/  
 	return false;
-    }    
+    }
+
+    private boolean notMovable(int x, int y){
+	if (x+1 != maze.length && y+1 !=maze.length || x-1 != 0 && y-1 != 0){
+	    if (maze [x+1][y] == '#'){
+		return false;
+	    }
+	    if (maze [x-1][y] == '#'){
+		return false;
+	    }
+	    if (maze [x][y+1] == '#'){
+		return false;
+	    }
+	    if (maze [x][y-1] == '#'){
+		return false;
+	    }
+	}
+	return true;
+    }
      
    /**mutator for the animate variable  **/
     public void setAnimate(boolean b){  /** IMPLEMENT THIS **/ }    

@@ -1,15 +1,14 @@
 import java.util.*;
-public class FrontierQueue<T> implements Frontier <T>{
-    private MyQueue<T> frontier;
+public class FrontierStack<T> implements Frontier <T>{
+    private Stack<T> frontier;
 
     public void add(T element){
-	frontier.enqueue(element);
+	frontier.push(element);
     }
     public T next(){
-	return frontier.dequeue();
+	return frontier.peek();
     }
     public boolean hasNext(){
 	return frontier.peek() == null;
     }
 }
-
