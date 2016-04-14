@@ -6,7 +6,7 @@ public class FrontierStack<T> implements Frontier <T>{
 	frontier.push(element);
     }
     public T next(){
-	return frontier.peek();
+	return frontier.pop();
     }
     public boolean hasNext(){
 	return frontier.peek() == null;

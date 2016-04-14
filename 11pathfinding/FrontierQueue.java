@@ -8,6 +8,11 @@ public class FrontierQueue<T> implements Frontier <T>{
     public T next(){
 	return frontier.dequeue();
     }
+
+    public T peek(){
+	return frontier.peek();
+    }
+    
     public boolean hasNext(){
 	return frontier.peek() == null;
     }

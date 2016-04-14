@@ -28,7 +28,7 @@ public class BetterMaze{
     private char[][] maze;
     private int[]    solution;
     private int      startRow,startCol;
-    private Frontier<Node> placesToGo;
+    private Frontier<Node> frontier;
     private boolean  animate;//default to false
 
    /**return a COPY of solution.
@@ -67,22 +67,21 @@ public class BetterMaze{
 	return false;
     }
 
-    private boolean notMovable(int x, int y){
+    private void move(int x, int y){
 	if (x+1 != maze.length && y+1 !=maze.length || x-1 != 0 && y-1 != 0){
 	    if (maze [x+1][y] == '#'){
-		return false;
+		frontier.add(new Node(x+1,y,frontier.next();));
 	    }
 	    if (maze [x-1][y] == '#'){
-		return false;
+		frontier.add(new Node(x-1,y,frontier.next();));
 	    }
 	    if (maze [x][y+1] == '#'){
-		return false;
+		frontier.add(new Node(x,y+1,frontier.next();));
 	    }
 	    if (maze [x][y-1] == '#'){
-		return false;
+		frontier.add(new Node(x,y-1,frontier.next();));
 	    }
 	}
-	return true;
     }
      
    /**mutator for the animate variable  **/
