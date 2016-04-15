@@ -29,7 +29,8 @@ public class BetterMaze{
     private int[]    solution;
     private int      startRow,startCol;
     private Frontier<Node> frontier;
-    private boolean  animate;//default to false
+    private boolean animate;
+    private Node solutionNode;
 
    /**return a COPY of solution.
      *This should be : [x1,y1,x2,y2,x3,y3...]
@@ -40,14 +41,13 @@ public class BetterMaze{
      *Postcondition:  the correct solution is in the returned array
     **/
     public int[] solutionCoordinates(){
-	return new int[1];
     }    
 
 
     /**initialize the frontier as a queue and call solve
     **/
     public boolean solveBFS(){  
-        placesToGo  = new FrontierQueue();     
+        frontier  = new FrontierQueue();     
 	return solve();
     }   
 
@@ -55,7 +55,7 @@ public class BetterMaze{
    /**initialize the frontier as a stack and call solve
     */ 
     public boolean solveDFS(){  
-        placesToGo = new FrontierStack();  
+        frontier = new FrontierStack();  
 	return solve();
     }    
 
@@ -67,9 +67,16 @@ public class BetterMaze{
 	move(startRow,startCol);
         while(frontier.hasNext()){
 	    if (solution(frontier.peek().getX(),frontier.peek().getY())){
+		solutionNode= frontier.peek();
 		return true;
 	    }
-	    if(!move(frontier.peek().getX(),frontier.peek().getY())){
+	    if(!move1(frontier.peek().getX(),frontier.peek().getY())
+	       &&
+	       !move2(frontier.peek().getX(),frontier.peek().getY())
+	       &&
+	       !move3(frontier.peek().getX(),frontier.peek().getY())
+	       &&
+	       !move4(frontier.peek().getX(),frontier.peek().getY())){
 		frontier.next();
 	    }
 	}
@@ -77,10 +84,10 @@ public class BetterMaze{
     }
     
     private boolean solution(int x, int y){
-	return maze[x][y]='E';
+	return maze[x][y]=='E';
     }
     
-    private boolean move(int x, int y){
+    private boolean move1(int x, int y){
 	if (maze[x][y] == ' '){
 	    maze[x][y]='.';
 	}
@@ -88,32 +95,48 @@ public class BetterMaze{
 	if (maze [x+1][y] != '#' && maze [x+1][y] != '.'){
 	    frontier.add(new Node(x+1,y,frontier.next()));
 	}
-	else{
-	    ans=false;
+
+	return ans;
+    }
+	
+    private boolean move2(int x, int y){
+	if (maze[x][y] == ' '){
+	    maze[x][y]='.';
 	}
+	boolean ans= true;
 	if (maze [x-1][y] != '#' &&  maze [x+1][y] != '.'){
 	    frontier.add(new Node(x-1,y,frontier.next()));
 	}
-	else{
-	    ans=false;
+	return ans;
+    }
+	
+    private boolean move3(int x, int y){
+	if (maze[x][y] == ' '){
+	    maze[x][y]='.';
 	}
+	boolean ans= true;
 	if (maze [x][y+1] != '#' && maze [x+1][y] != '.'){
 	    frontier.add(new Node(x,y+1,frontier.next()));
 	}
-	else{
-	    ans=false;
+	return ans
+	    }
+	
+    private boolean move4(int x, int y){
+	if (maze[x][y] == ' '){
+	    maze[x][y]='.';
 	}
+	boolean ans= true;
 	if (maze [x][y-1] != '#' && maze [x+1][y] != '.'){
 	    frontier.add(new Node(x,y-1,frontier.next()));
 	}
-	else{
-	    ans=false;
-	}
 	return ans;
     }
+		     
      
    /**mutator for the animate variable  **/
-    public void setAnimate(boolean b){  /** IMPLEMENT THIS **/ }    
+    public void setAnimate(boolean b){
+	animate = b;
+    }    
 
 
     public BetterMaze(String filename){
@@ -215,6 +238,6 @@ public class BetterMaze{
 
        
     
-    
+	
 
-}
+	}

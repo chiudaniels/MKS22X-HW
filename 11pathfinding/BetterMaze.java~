@@ -6,7 +6,7 @@ public class BetterMaze{
 	private Node prev;
 	private int x,y;
 	
-	public BetterMaze(int row, int col, Node previous){
+	public Node(int row, int col, Node previous){
 	    x=row;
 	    y=col;
 	    prev=previous;
@@ -62,26 +62,54 @@ public class BetterMaze{
    /**Search for the end of the maze using the frontier. 
       Keep going until you find a solution or run out of elements on the frontier.
     **/
-    private boolean solve(){  
-        /** IMPLEMENT THIS **/  
-	return false;
-    }
-
-    private void move(int x, int y){
-	if (x+1 != maze.length && y+1 !=maze.length || x-1 != 0 && y-1 != 0){
-	    if (maze [x+1][y] == '#'){
-		frontier.add(new Node(x+1,y,frontier.next();));
+    private boolean solve(){
+	Node start = new Node(startRow,startCol,null);
+	move(startRow,startCol);
+        while(frontier.hasNext()){
+	    if (solution(frontier.peek().getX(),frontier.peek().getY())){
+		return true;
 	    }
-	    if (maze [x-1][y] == '#'){
-		frontier.add(new Node(x-1,y,frontier.next();));
-	    }
-	    if (maze [x][y+1] == '#'){
-		frontier.add(new Node(x,y+1,frontier.next();));
-	    }
-	    if (maze [x][y-1] == '#'){
-		frontier.add(new Node(x,y-1,frontier.next();));
+	    if(!move(frontier.peek().getX(),frontier.peek().getY())){
+		frontier.next();
 	    }
 	}
+	return false;
+    }
+    
+    private boolean solution(int x, int y){
+	return maze[x][y]='E';
+    }
+    
+    private boolean move(int x, int y){
+	if (maze[x][y] == ' '){
+	    maze[x][y]='.';
+	}
+	boolean ans= true;
+	if (maze [x+1][y] != '#' && maze [x+1][y] != '.'){
+	    frontier.add(new Node(x+1,y,frontier.next()));
+	}
+	else{
+	    ans=false;
+	}
+	if (maze [x-1][y] != '#' &&  maze [x+1][y] != '.'){
+	    frontier.add(new Node(x-1,y,frontier.next()));
+	}
+	else{
+	    ans=false;
+	}
+	if (maze [x][y+1] != '#' && maze [x+1][y] != '.'){
+	    frontier.add(new Node(x,y+1,frontier.next()));
+	}
+	else{
+	    ans=false;
+	}
+	if (maze [x][y-1] != '#' && maze [x+1][y] != '.'){
+	    frontier.add(new Node(x,y-1,frontier.next()));
+	}
+	else{
+	    ans=false;
+	}
+	return ans;
     }
      
    /**mutator for the animate variable  **/
