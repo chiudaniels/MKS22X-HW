@@ -32,6 +32,12 @@ public class BSTree<T extends comparable<T>> {
 	}
 
 	public int getHeight()  {
+	    if (getHeight(left) > getHeight(right)){
+		return getHeight(left);
+	    } 
+	    else{
+		return getHeight(right);
+	    }
 	}
 	public int getHeight(Node x){
 	    if (left.equals(null) && right.equals(null)){
@@ -42,16 +48,19 @@ public class BSTree<T extends comparable<T>> {
 	    if (!left.equals(null)){
 		leftsum += getHeight(left);
 	    }
-	    if (!right.equals(null)){
+	    else if (!right.equals(null)){
 		rightsum += getHeight(right);
 	    }
 	    if (leftsum > rightsum){
 		return leftsum+1;
 	    }
+	    else{
+		return rightsum+1;
+	    }
 	}
     
     }
-    Node root;
+    private Node root;
 
     public void add(T value){
     }
