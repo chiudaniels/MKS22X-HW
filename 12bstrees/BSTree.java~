@@ -27,8 +27,27 @@ public class BSTree<T extends comparable<T>> {
 
 	public String toString() {
 	}
+	private String toString(Node x){
+	    String ans= "" + data;
+	    if (left == null || right == null){
+		ans += "_";
+	    }
+	    ans += toString(left)+ toString(right);
+	    return ans;
+	}
 
 	public boolean contains(T value){
+	}
+	private boolean contains(T value, Node x){
+	    if (!data.equals(value) && (left == null || right == null)){
+		return false;
+	    }
+	    if (data.equals(value)){
+		return true;
+	    }
+	    if (contains(value,left) == true || contains(value,right)== true){
+		return true;
+	    }
 	}
 
 	public int getHeight()  {

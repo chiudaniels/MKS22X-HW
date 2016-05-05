@@ -1,8 +1,13 @@
-public class BSTree<T extends comparable<T>> {
+public class BSTree<T extends Comparable<T>> {
     private class Node{
 	T data;
         Node left;
 	Node right;
+
+	public Node(T value){
+	    data=value;
+	}
+	/*
 	public void setValue(T value){
 	    data= value;
 	}
@@ -21,33 +26,57 @@ public class BSTree<T extends comparable<T>> {
 	public Node getRight(){
 	    return right;
 	}
-
+	*/
 	public void add(T value){
+	    if (data == null){
+		data = value;
+	    }
+	    if (data.compareTo(value)<0 && left == null){
+		left= new Node(value);
+	    }
+	    if (data.compareTo(value)>0 && right == null){
+		right=new Node(value);
+	    }
+	    if (data.compareTo(value)<0){
+		left.add(value);
+	    }
+	    if (data.compareTo(value)>0){
+		right.add(value);
+	    }
 	}
 
-	public String toString() {
-	}
-	private String toString(Node x){
-	    String ans= "" + data;
-	    if (left == null || right == null){
+	public String toString(){
+	    String ans= "" + data+" ";
+	    if (left == null){
 		ans += "_";
 	    }
-	    ans += toString(left)+ toString(right);
+	    else{
+		ans += left.toString()+ " ";
+	    }
+	    if (right == null){
+		ans +="_";
+	    }
+	    else{
+		ans += right.toString() + " ";
+	    }
 	    return ans;
 	}
 
 	public boolean contains(T value){
-	}
-	private boolean contains(T value, Node x){
-	    if (!data.equals(value) && (left == null || right == null)){
-		return false;
+	    boolean x=false;
+	    if (!data.equals(value) && (left == null && right == null)){
+		x= false;
 	    }
 	    if (data.equals(value)){
-		return true;
+		x= true;
 	    }
-	    if (contains(value,left) == true || contains(value,right)== true){
-		return true;
+	    if(data.compareTo(value)<0){
+		x= left.contains(value);
 	    }
+	    if(data.compareTo(value)>0){
+		x= right.contains(value);
+	    }
+	    return x;
 	}
 
 	public int getHeight()  {
@@ -82,12 +111,27 @@ public class BSTree<T extends comparable<T>> {
     private Node root;
 
     public void add(T value){
+	if (root == null){
+	    root = new Node(value);
+	}
+	root.add(value);
     }
     public String toString() {
+	if (root == null){
+	    return "";
+	}
+	return root.toString();
     }
     public boolean contains(T value){
+        if (root == null){
+	    return false;
+	}
+	return root.contains(value);
     }
     public int getHeight()  {
+	if (root == null){
+	    return 0;
+	}
+	return root.getHeight();
     }
-   
 }
