@@ -4,7 +4,7 @@ public class MyHeap<T extends Comparable<T>>
 {
     private int size;
     private T[] data;
-    private boolean max;
+    private int matt= 1;
 
    public MyHeap(){
        data=(T[])new Comparable[0];
@@ -25,82 +25,43 @@ public class MyHeap<T extends Comparable<T>>
        data[y]=temp;
    }
 
-    private void pushDown(int k){
-	if (max==false){
-	    if (2*k+2>data.length){
-		return;
-	    }
-	    if (data[k].compareTo(data[2*k+1])<0){
-		swap(k,2*k);
-		pushDown(2*k);
-	    }
-	    else if (data[k].compareTo(data[2*k+2])<0){
-		swap(k,2*k+2);
-		pushDown(2*k+2);
-	    }
-	    else{
-		return;
-	    }
-	}
-	else{
-	    if (2*k+2>data.length){
-		return;
-	    }
-	    if (data[k].compareTo(data[2*k+1])>0){
-		swap(k,2*k);
-		pushDown(2*k);
-	    }
-	    else if (data[k].compareTo(data[2*k+2])>0){
-		swap(k,2*k+2);
-		pushDown(2*k+2);
-	    }
-	    else{
-		return;
-	    }
-	}
-    }
-
-   private void pushUp(int k){
-       if (max==false){
-	   if (k/2==0){
-	       return;
-	   }
-	   if (data[k].compareTo(data[(k-1)/2])>0){
-	       swap(k-1,(k-1)/2);
-	       pushUp((k-1)/2);
-	   }
-	   else if (data[k].compareTo(data[k/2])>0){
-	       swap(k,k/2);
-	       pushUp(k/2);
-	   }
-	   else{
-	       return;
-	   }
+   private void pushDown(int k){
+       if (2*k+2>data.length){
+	   return;
+       }
+       if (data[k].compareTo(data[2*k+1])*matt<0 && data[2*k+1].compareTo(data[2*k+2])*matt>0){
+	   swap(k,2*k);
+	   pushDown(2*k);
+       }
+       else if (data[k].compareTo(data[2*k+2])*matt<0){
+	   swap(k,2*k+2);
+	   pushDown(2*k+2);
        }
        else{
-	   if (k/2==0){
-	       return;
-	   }
-	   if (data[k].compareTo(data[(k-1)/2])<0){
-	       swap(k-1,(k-1)/2);
-	       pushUp((k-1)/2);
-	   }
-	   else if (data[k].compareTo(data[k/2])<0){
-	       swap(k,k/2);
-	       pushUp(k/2);
-	   }
-	   else{
-	       return;
-	   }
+	   return;
+       }
+   }
+
+   private void pushUp(int k){
+       if (k/2==0){
+	   return;
+       }
+       if (data[k].compareTo(data[(k-1)/2])*matt>0){
+	   swap(k-1,(k-1)/2);
+	   pushUp((k-1)/2);
+       }
+       else if (data[k].compareTo(data[k/2])*matt>0){
+	   swap(k,k/2);
+	   pushUp(k/2);
+       }
+       else{
+	   return;
        }
    }
 
    private void heapify(){
-       for (int x=size/4; x<size/2;x++){
+       for(int x=size/2;x>0;x--){
 	   pushDown(x);
-       }
-       for(int x=size/2;x<size;x++){
-	   pushUp(x);
        }
    }
 
@@ -149,7 +110,9 @@ public class MyHeap<T extends Comparable<T>>
    //do this last
     public MyHeap(boolean isMax){
 	data=(T[])new Comparable[0];
-	max = isMax;
+	if (!isMax){
+	    matt = -1;
+	}
     }
     public MyHeap(T[] array, boolean isMax){
 	data=(T[])new Comparable[array.length];
@@ -157,7 +120,9 @@ public class MyHeap<T extends Comparable<T>>
 	    data[x]=array[x];
 	}
 	size = array.length;
-	max=isMax;
+	if (!isMax){
+	    matt = -1;
+	}
     }
 
 }
