@@ -1,0 +1,7 @@
+public class driver{
+    public static void main(String[]args){
+	int [] y= [1,2,3,4];
+	MyHeap x = new MyHeap(y);
+	x.heapify();
+    } 
+}
