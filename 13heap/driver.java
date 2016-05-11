@@ -1,9 +1,9 @@
 public class driver{
     public static void main(String[]args){
-	Integer [] y= {4,3,2,1};
+	Integer [] y= {1,2,3,4,5};
 	MyHeap x = new MyHeap<Integer> (y);
-	//x.heapify();
-	x.add(5);
+	x.heapify();
+	//x.add(5);
 	System.out.println(x);
     } 
 }
